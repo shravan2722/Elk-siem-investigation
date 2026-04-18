@@ -31,17 +31,26 @@ The objective was to analyze VPN authentication logs, identify anomalous login b
 
 ## Investigation Methodology
 
-### 1. Log Exploration
+This investigation followed a structured SOC-style workflow to identify and validate suspicious login behavior.
 
-* Used Kibana Discover to inspect logs
-* Key fields:
+---
+
+### 1️. Log Exploration (Initial Triage)
+
+* Used **Kibana Discover** to analyze raw VPN authentication logs
+* Reviewed key fields:
 
   * `Source_ip`
   * `UserName`
   * `source_state`
   * `@timestamp`
+* Observed unusual patterns such as repeated IP usage and missing location data
 
-### 2. Filtering & Querying
+---
+
+### 2️. Filtering & Querying
+
+Applied **KQL (Kibana Query Language)** to isolate suspicious activity:
 
 ```kql
 Source_ip: "238.163.231.224"
@@ -55,17 +64,58 @@ UserName: "Suleman" OR "Rafique M"
 NOT source_state : *
 ```
 
-### 3. Correlation Analysis
+* Identified a suspicious IP associated with multiple users
+* Detected missing geographic information (possible anonymization)
 
-* IP ↔ Users
-* IP ↔ Locations
-* Activity ↔ Time
+---
 
-### 4. Visualization
+### 3️. Correlation Analysis
+
+Correlated multiple data points to uncover relationships:
+
+* **IP ↔ Users** → Same IP used by multiple accounts
+* **IP ↔ Locations** → Activity across different states
+* **Activity ↔ Time** → Repeated login patterns
+
+This step confirmed anomalous behavior patterns.
+
+---
+
+### 4️. Visualization & Pattern Analysis
+
+Built visualizations using **Kibana Lens**:
 
 * User activity over time
-* Location-based access
-* Detection of spikes/anomalies
+* Geographic distribution of logins
+* Detection of spikes and anomalies
+
+Identified a noticeable increase in login activity in late January.
+
+---
+
+### 5️. Targeted Investigation (User + IP Correlation)
+
+Performed focused analysis using combined filters:
+
+```kql
+Source_ip: "238.163.231.224" AND UserName: "Suleman"
+```
+
+* Confirmed repeated login activity from the same IP
+* Observed consistent behavior patterns
+* Strengthened correlation between suspicious entities
+
+---
+
+### 6️. Hypothesis & Validation
+
+Based on findings, the following scenarios were evaluated:
+
+* VPN or proxy usage
+* Credential sharing
+* Potential unauthorized access
+
+All hypotheses were supported through log correlation and visualization evidence.
 
 ---
 
@@ -112,6 +162,9 @@ NOT source_state : *
 
 ### Correlation Insight
 ![Correlation Analysis](screenshots/correlation-analysis.png)
+
+### Targeted Investigation (User + IP Correlation)
+![User IP Correlation](screenshots/user-ip-correlation.png)
 
 ---
 
