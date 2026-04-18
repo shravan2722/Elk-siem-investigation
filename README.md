@@ -111,8 +111,7 @@ NOT source_state : *
 ![Location](screenshots/location-analysis.png)
 
 ### Correlation Insight
-
-![Investigation](screenshots/investigation.png)
+![Correlation Analysis](screenshots/correlation-analysis.png)
 
 ---
 
