@@ -148,23 +148,47 @@ All hypotheses were supported through log correlation and visualization evidence
 
 ## Visual Evidence
 
-### Discover Analysis
-
+### Log Analysis (Discover)
 ![Discover](screenshots/discover.png)
 
-### User Activity Over Time
+Initial log exploration using Kibana Discover to inspect raw VPN authentication logs. 
+This view helped identify key fields such as IP address, username, and geographic data, 
+which guided further investigation.
 
+---
+
+### User Activity Over Time
 ![User Activity](screenshots/user-activity.png)
 
-### Location Analysis
+Time-based analysis of user login activity using @timestamp. 
+This visualization highlights patterns and spikes in authentication events, 
+helping identify abnormal behavior.
 
+---
+
+### Location Analysis
 ![Location](screenshots/location-analysis.png)
+
+Geographic distribution of login activity across different states. 
+Used to detect anomalies such as access from multiple locations.
+
+---
 
 ### Correlation Insight
 ![Correlation Analysis](screenshots/correlation-analysis.png)
 
+Correlation between IP address, users, and locations. 
+This visualization reveals that a single IP is associated with multiple users 
+and geographic locations, indicating suspicious behavior.
+
+---
+
 ### Targeted Investigation (User + IP Correlation)
 ![User IP Correlation](screenshots/user-ip-correlation.png)
+
+Focused analysis using combined filters (Source_ip + UserName). 
+This confirms repeated login activity from the same IP for a specific user, 
+strengthening the investigation findings.
 
 ---
 
