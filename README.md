@@ -2,11 +2,26 @@
 ![SIEM](https://img.shields.io/badge/SIEM-ELK-blue)
 ![SOC](https://img.shields.io/badge/Role-SOC%20Analysis-green)
 
+----
+## Executive Summary
+
+Analysis of VPN authentication logs identified a suspicious IP (238.163.231.224) used by multiple users across different geographic locations with missing location data. The activity pattern suggests potential VPN/proxy usage or credential sharing, with repeated login behavior observed over time. This activity is anomalous and requires further monitoring and investigation.
+
+---
+
 ## Project Overview
 
 This project demonstrates a **SIEM investigation** using the **ELK Stack (Elasticsearch, Logstash, Kibana)**.
 
 The objective was to analyze VPN authentication logs, identify anomalous login behavior, and perform a structured investigation similar to a **SOC analyst workflow**.
+
+---
+
+## Data Scope
+
+- Time range: Jan 1, 2022 – Feb 28, 2022  
+- Log source: VPN authentication logs  
+- Total events analyzed: ~2,800+
 
 ---
 
@@ -123,6 +138,15 @@ No evidence of brute-force attempts was observed, suggesting the activity is mor
 
 ## Key Findings
 
+- Suspicious IP: **238.163.231.224**
+- Users involved: **Suleman, Rafique M**
+- Locations observed: **Michigan, New York**
+- Missing geolocation data in multiple records
+
+The same IP address was used across multiple accounts and locations, strongly indicating anonymization (VPN/proxy) or credential sharing.
+
+----
+
 ### Suspicious IP
 
 **238.163.231.224**
@@ -197,7 +221,7 @@ confirming a strong correlation between events and reinforcing the investigation
 ![Correlation Analysis](screenshots/correlation-analysis.png)
 
 A significant number of records contained missing location data (`source_state`), suggesting possible anonymization or logging gaps.
-Correlation between IP address, users, and locations. 
+Correlation between IP address, users, and locations shows that a single IP is associated with multiple users across different geographic regions.
 This visualization reveals that a single IP is associated with multiple users 
 and geographic locations, indicating suspicious behavior.
 
@@ -222,6 +246,15 @@ This dashboard provides a consolidated view of the investigation, combining user
 It enables quick identification of anomalies, including repeated login behavior from the same IP across multiple users and locations.
 
 Filters were applied dynamically to isolate individual users (e.g., Suleman and Rafique M) for deeper investigation and validation.
+
+---
+
+## Limitations
+
+- No endpoint telemetry available to validate user activity
+- Missing `source_state` reduces geolocation accuracy
+- No MFA or device-level data for identity validation
+
 ---
 
 ## Security Analysis
@@ -264,6 +297,17 @@ This activity would trigger:
 
 ---
 
+## Detection Recommendation
+
+To detect similar activity in a real SOC environment:
+
+- Alert on multiple users logging in from the same IP
+- Detect login activity from different geographic locations within short timeframes
+- Flag events with missing or null geolocation fields
+
+---
+
+
 ## Future Improvements
 
 * SIEM alert rules
@@ -290,5 +334,6 @@ This activity would trigger:
 Cybersecurity Master's Student – EPITA (Paris, France 🇫🇷)
 Aspiring SOC Analyst
 
-Open to Cybersecurity / SOC Internships in Europe
-[LinkedIn](https://www.linkedin.com/in/shravan-chanda-87280a206/)
+## Connect with Me
+Actively seeking **SOC Analyst / Cybersecurity Internships in Europe 🇪🇺**
+[LinkedIn – Shravan Chanda](https://www.linkedin.com/in/shravan-chanda-87280a206/)
