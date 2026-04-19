@@ -334,5 +334,7 @@ Cybersecurity Master's Student – EPITA (Paris, France 🇫🇷)
 Aspiring SOC Analyst
 
 ## Connect with Me
+
 Actively seeking **SOC Analyst / Cybersecurity Internships in Europe 🇪🇺**
+
 [LinkedIn – Shravan Chanda](https://www.linkedin.com/in/shravan-chanda-87280a206/)
