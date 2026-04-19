@@ -293,7 +293,17 @@ This activity would trigger:
 
 ## Project Demo
 
-👉 https://your-video-link-here
+This video demonstrates the SIEM investigation process using Kibana, including log analysis, anomaly detection, and data visualization.
+
+The demo highlights:
+- Identification of a suspicious IP address
+- Correlation between multiple users and geographic locations
+- Detection of missing location data (possible VPN/proxy usage)
+- Visualization of login patterns and anomalies using Kibana Lens
+- Dashboard creation for SOC-style monitoring and analysis
+Note: The investigation follows a structured SOC workflow from raw log analysis to correlation and visualization.
+
+👉 https://drive.google.com/file/d/1yL8QmpZxD17QAE3T9bjO2bKj-mEb2ZeZ/view?usp=drive_link
 
 ---
 
