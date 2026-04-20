@@ -5,7 +5,11 @@
 ----
 ## Executive Summary
 
-Analysis of VPN authentication logs identified a suspicious IP (238.163.231.224) used by multiple users across different geographic locations with missing location data. The activity pattern suggests potential VPN/proxy usage or credential sharing, with repeated login behavior observed over time. This activity is anomalous and requires further monitoring and investigation.
+Analysis of VPN authentication logs identified a suspicious IP (238.163.231.224) used by multiple users across different geographic locations with missing location data. 
+
+The activity pattern suggests potential VPN/proxy usage or credential sharing, with repeated login behavior observed over time.
+
+This activity is anomalous and requires further monitoring and investigation.
 
 ----
 
@@ -54,7 +58,7 @@ This investigation followed a structured SOC-style workflow to identify and vali
 
 ### 1️. Log Exploration (Initial Triage)
 
-* Used **Kibana Discover** to analyze raw VPN authentication logs
+* Used **Kibana Discover** to analyze raw VPN authentication logs.
 * Reviewed key fields:
 
   * `Source_ip`
@@ -81,8 +85,8 @@ UserName: "Suleman" OR "Rafique M"
 NOT source_state : *
 ```
 
-* Identified a suspicious IP associated with multiple users
-* Detected missing geographic information (possible anonymization)
+* Identified a suspicious IP associated with multiple users.
+* Detected missing geographic information (possible anonymization).
 
 ----
 
@@ -90,9 +94,9 @@ NOT source_state : *
 
 Correlated multiple data points to uncover relationships:
 
-* **IP ↔ Users** → Same IP used by multiple accounts
-* **IP ↔ Locations** → Activity across different states
-* **Activity ↔ Time** → Repeated login patterns
+* **IP ↔ Users** → Same IP used by multiple accounts.
+* **IP ↔ Locations** → Activity across different states.
+* **Activity ↔ Time** → Repeated login patterns.
 
 This step confirmed anomalous behavior patterns.
 
@@ -102,9 +106,9 @@ This step confirmed anomalous behavior patterns.
 
 Built visualizations using **Kibana Lens**:
 
-* User activity over time
-* Geographic distribution of logins
-* Detection of spikes and anomalies
+* User activity over time.
+* Geographic distribution of logins.
+* Detection of spikes and anomalies.
 
 Identified a noticeable increase in login activity in late January.
 
@@ -118,9 +122,9 @@ Performed focused analysis using combined filters:
 Source_ip: "238.163.231.224" AND UserName: "Suleman"
 ```
 
-* Confirmed repeated login activity from the same IP
-* Observed consistent behavior patterns
-* Strengthened correlation between suspicious entities
+* Confirmed repeated login activity from the same IP.
+* Observed consistent behavior patterns.
+* Strengthened correlation between suspicious entities.
 
 ----
 
@@ -128,9 +132,9 @@ Source_ip: "238.163.231.224" AND UserName: "Suleman"
 
 Based on findings, the following scenarios were evaluated:
 
-* VPN or proxy usage
-* Credential sharing
-* Potential unauthorized access
+* VPN or proxy usage.
+* Credential sharing.
+* Potential unauthorized access.
 
 All hypotheses were supported through log correlation and visualization evidence.
 No evidence of brute-force attempts was observed, suggesting the activity is more consistent with valid credential usage rather than password attacks.
@@ -150,10 +154,10 @@ The same IP address was used across multiple accounts and locations, strongly in
 
 ## Suspicious Indicators
 
-* Same IP used by multiple users
-* Same IP across different locations
-* Missing `source_state` values
-* Spike in activity (late January)
+* Same IP used by multiple users.
+* Same IP across different locations.
+* Missing `source_state` values.
+* Spike in activity (late January).
 
 ----
 
@@ -239,9 +243,9 @@ Filters were applied dynamically to isolate individual users (e.g., Suleman and 
 
 ## Limitations
 
-- No endpoint telemetry available to validate user activity
-- Missing `source_state` reduces geolocation accuracy
-- No MFA or device-level data for identity validation
+- No endpoint telemetry available to validate user activity.
+- Missing `source_state` reduces geolocation accuracy.
+- No MFA or device-level data for identity validation.
 
 ----
 
@@ -249,9 +253,9 @@ Filters were applied dynamically to isolate individual users (e.g., Suleman and 
 
 The behavior suggests:
 
-* Shared IP usage across accounts
-* Multi-location access patterns
-* Possible VPN/proxy usage or credential sharing
+* Shared IP usage across accounts.
+* Multi-location access patterns.
+* Possible VPN/proxy usage or credential sharing.
 The combination of multi-user access, multi-location activity, and missing geolocation data strongly indicates anonymized or shared access behavior.
 This behavior is anomalous and may indicate account misuse or anonymized access. 
 It should be escalated for further investigation and continuous monitoring.
@@ -270,8 +274,8 @@ It should be escalated for further investigation and continuous monitoring.
 
 This activity would trigger:
 
-* Medium–High severity alert
-* Further investigation:
+* Medium–High severity alert.
+* Further investigation:.
 
   * Authentication logs
   * Endpoint activity
@@ -284,11 +288,11 @@ This activity would trigger:
 This video demonstrates the SIEM investigation process using Kibana, including log analysis, anomaly detection, and data visualization.
 
 The demo highlights:
-- Identification of a suspicious IP address
-- Correlation between multiple users and geographic locations
-- Detection of missing location data (possible VPN/proxy usage)
-- Visualization of login patterns and anomalies using Kibana Lens
-- Dashboard creation for SOC-style monitoring and analysis
+- Identification of a suspicious IP address.
+- Correlation between multiple users and geographic locations.
+- Detection of missing location data (possible VPN/proxy usage).
+- Visualization of login patterns and anomalies using Kibana Lens.
+- Dashboard creation for SOC-style monitoring and analysis.
   
 > Note: The investigation follows a structured SOC workflow from raw log analysis to correlation and visualization.
 
@@ -300,9 +304,9 @@ The demo highlights:
 
 To detect similar activity in a real SOC environment:
 
-- Alert on multiple users logging in from the same IP
-- Detect login activity from different geographic locations within short timeframes
-- Flag events with missing or null geolocation fields
+- Alert on multiple users logging in from the same IP.
+- Detect login activity from different geographic locations within short timeframes.
+- Flag events with missing or null geolocation fields.
 
 ----
 
